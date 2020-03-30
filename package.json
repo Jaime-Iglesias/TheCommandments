@@ -1,0 +1,19 @@
+{
+  "name": "thecommandments",
+  "version": "1.0.0",
+  "description": "A bunch of rules for solhint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaime-Iglesias/TheCommandments.git"
+  },
+  "author": "Jaime Iglesias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaime-Iglesias/TheCommandments/issues"
+  },
+  "homepage": "https://github.com/Jaime-Iglesias/TheCommandments#readme"
+}
