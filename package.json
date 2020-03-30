@@ -1,6 +1,6 @@
 {
-  "name": "solhint-plugin-cmf-ruless",
-  "version": "1.0.2",
+  "name": "solhint-plugin-rules-test",
+  "version": "1.0.0",
   "description": "A bunch of rules for solhint",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jaime-Iglesias/solhint-plugin-cmf-rules.git"
+    "url": "git+https://github.com/Jaime-Iglesias/solhint-plugin-rules-test.git"
   },
   "author": "Jaime Iglesias",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jaime-Iglesias/solhint-plugin-cmf-rules/issues"
+    "url": "https://github.com/Jaime-Iglesias/solhint-plugin-rules-test/issues"
   },
-  "homepage": "https://github.com/Jaime-Iglesias/solhint-plugin-cmf-rules#readme"
+  "homepage": "https://github.com/Jaime-Iglesias/solhint-plugin-rules-test#readme"
 }
