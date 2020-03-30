@@ -1,1 +1,1 @@
-{ naming: require('./naming')} 
+module.exports = { naming: require('./naming')} 

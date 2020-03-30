@@ -1,1 +1,1 @@
-{ rules: require('./rules') } 
+module.exports = { rules: require('./rules') } 
