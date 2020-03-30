@@ -1,5 +1,5 @@
 {
-  "name": "thecommandments",
+  "name": "solhint-plugin-cmf-rules",
   "version": "1.0.0",
   "description": "A bunch of rules for solhint",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jaime-Iglesias/TheCommandments.git"
+    "url": "git+https://github.com/Jaime-Iglesias/solhint-plugin-cmf-rules.git"
   },
   "author": "Jaime Iglesias",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jaime-Iglesias/TheCommandments/issues"
+    "url": "https://github.com/Jaime-Iglesias/solhint-plugin-cmf-rules/issues"
   },
-  "homepage": "https://github.com/Jaime-Iglesias/TheCommandments#readme"
+  "homepage": "https://github.com/Jaime-Iglesias/solhint-plugin-cmf-rules#readme"
 }
