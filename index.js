@@ -1,5 +1,23 @@
 const naming = require("./common/identifier-naming");
 
+class NoFoosAllowed {
+    constructor(reporter, config) {
+      this.ruleId = 'no-foos'
+  
+      this.reporter = reporter
+      this.config = config
+    }
+  
+    enterContractDefinition(ctx) {
+      const identifier = ctx.children[1]
+      const text = identifier.getText()
+  
+      if (text === 'Foo') {
+        this.reporter.error(ctx, this.ruleId, 'Contracts cannot be named "Foo"')
+      }
+    }
+  }
+
 class NoUnderScoreParams {
     constructor(reporter, config) {
         this.ruleId = 'param-name-underscore'
@@ -82,4 +100,4 @@ class UnNamedReturns {
     }
 }
 
-module.exports = [UnNamedReturns, NoUintAlias, NoUnderScoreParams];
+module.exports = [NoFoosAllowed, UnNamedReturns, NoUintAlias, NoUnderScoreParams];
