@@ -1,5 +1,5 @@
 {
-  "name": "solhint-plugin-cmf-rules",
+  "name": "solhint-plugin-cmf-ruless",
   "version": "1.0.0",
   "description": "A bunch of rules for solhint",
   "main": "index.js",

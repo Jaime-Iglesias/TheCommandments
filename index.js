@@ -1,4 +1,4 @@
-const naming = require("./common/identifier-naming")
+const naming = require("./common/identifier-naming");
 
 class NoUnderScoreParams {
     constructor(reporter, config) {
@@ -82,4 +82,4 @@ class UnNamedReturns {
     }
 }
 
-module.exports = [UnNamedReturns, NoUintAlias, NoUnderScoreParams]
+module.exports = [UnNamedReturns, NoUintAlias, NoUnderScoreParams];
