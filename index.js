@@ -27,12 +27,14 @@ class NoUnderScoreParams {
     }
 
     exitEventParameter(ctx) {
+        console.log('exitEvenParameter');
         this.exitParameter(ctx)
     }
 
     exitParameter(ctx) {
+        console.log('exitParameter');
         const identifier = this.findIdentifier(ctx)
-    
+        console.log('identifier',identifier);
         if (identifier && naming.hasUnderScore(identifier.getText())) {
           this._error(identifier)
         }
@@ -40,7 +42,7 @@ class NoUnderScoreParams {
 
     findIdentifier(ctx) {
         const children = ctx.children
-    
+        console.log('findIdentifier', children);
         const ids = children.filter(i => typeOf(i) === 'identifier')
     
         return ids.length > 0 && ids[0]
@@ -59,10 +61,12 @@ class NoUintAlias {
     }
 
     exitElementaryTypeName(ctx) {
+        console.log('ElementaryTypeName')
         this.exitUint(ctx)
     }
 
     exitUint(ctx) {
+        console.log('Uint')
         const identifier = ctx.children[1];
         const text = identifier.getText();
 
