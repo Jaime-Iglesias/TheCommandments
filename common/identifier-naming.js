@@ -3,7 +3,7 @@ function match(text, regex) {
   }
 
 module.exports = {
-    hasUnderscore(text) {
+    hasUnderScore(text) {
         return match(text, /_/)
     }
 }
