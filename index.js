@@ -1,4 +1,5 @@
 const naming = require("./common/identifier-naming");
+const typeOf = require("./common/treeTraversing");
 
 class NoFoosAllowed {
     constructor(reporter, config) {
@@ -12,7 +13,7 @@ class NoFoosAllowed {
       const identifier = ctx.children[1]
       const text = identifier.getText()
   
-      if (text === 'Foo') {
+      if (text === 'Foo' || text === 'foo') {
         this.reporter.error(ctx, this.ruleId, 'Contracts cannot be named "Foo"')
       }
     }
@@ -65,7 +66,7 @@ class NoUintAlias {
         const identifier = ctx.children[1];
         const text = identifier.getText();
 
-        if(text === 'uint') {
+        if(text === 'Uint') {
             this.reporter.error(ctx, this.ruleId, 'Uint variables need to be more precise');
         }
     }
