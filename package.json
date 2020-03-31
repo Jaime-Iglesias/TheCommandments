@@ -1,6 +1,6 @@
 {
   "name": "solhint-plugin-rules-test",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A bunch of rules for solhint",
   "main": "index.js",
   "scripts": {
