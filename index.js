@@ -1,5 +1,5 @@
 const naming = require("./common/identifier-naming");
-const typeOf = require("./common/treeTraversing");
+const { typeOf } = require("./common/treeTraversing");
 
 class NoFoosAllowed {
     constructor(reporter, config) {
