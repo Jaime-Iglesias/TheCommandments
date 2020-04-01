@@ -1,6 +1,8 @@
 const naming = require("./common/identifier-naming");
 const { typeOf } = require("./common/treeTraversing");
+const TreeTraversing = require("./common/treeTraversing");
 
+const traversing = new TreeTraversing()
 class NoFoosAllowed {
     constructor(reporter, config) {
       this.ruleId = 'no-foos'
@@ -32,7 +34,7 @@ class NoUnderScoreParams {
 
     exitParameter(ctx) {
         const identifier = this.findIdentifier(ctx)
-    
+
         if (identifier && naming.hasUnderScore(identifier.getText())) {
           this._error(identifier)
         }
@@ -63,10 +65,10 @@ class NoUintAlias {
     }
 
     exitUint(ctx) {
-        const identifier = ctx.children[1];
-        const text = identifier.getText();
+        const identifier = ctx.children[0]
+        const text = identifier.getText()
 
-        if(text === 'Uint') {
+        if(text === 'uint') {
             this.reporter.error(ctx, this.ruleId, 'Uint variables need to be more precise');
         }
     }
@@ -82,20 +84,17 @@ class UnNamedReturns {
 
     exitReturnParameters(ctx) {
         const identifier = this.findIdentifier(ctx)
-    
+        console.log('identifer', identifier)
+        console.log('b')
         if (identifier) {
-          this._error(identifier)
+            this._error(identifier)
         }
     }
 
     findIdentifier(ctx) {
-        const children = ctx.children
-    
-        const ids = children.filter(i => typeOf(i) === 'identifier')
-    
-        return ids.length > 0 && ids[0]
+        return traversing.findIdentifier(ctx);
     }
-    
+
     _error(identifier) {
         this.reporter.error(identifier, this.ruleId, 'return params must be unnamed')
     }

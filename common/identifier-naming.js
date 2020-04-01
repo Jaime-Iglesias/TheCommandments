@@ -4,6 +4,6 @@ function match(text, regex) {
 
 module.exports = {
     hasUnderScore(text) {
-        return match(text, /_/)
+        return text.replace(/_/, '').length != text.length
     }
 }
