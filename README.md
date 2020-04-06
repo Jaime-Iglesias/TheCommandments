@@ -8,7 +8,7 @@ if you don't have a `.solhint.json` then execute `npx solhint init-config` and f
 ```json
 {
   "extends": ["solhint:recommended"],
-  "plugins": ["rules-test"],
+  "plugins": [cmf-rules-stable"],
   "rules": {
     "cmf-rules-stable/no-alias": "warn",
     "cmf-rules-stablet/no-underscore-params": "warn",
