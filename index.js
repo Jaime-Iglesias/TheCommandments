@@ -3,27 +3,10 @@ const { typeOf } = require("./common/treeTraversing");
 const TreeTraversing = require("./common/treeTraversing");
 
 const traversing = new TreeTraversing()
-class NoFoosAllowed {
-    constructor(reporter, config) {
-      this.ruleId = 'no-foos'
-  
-      this.reporter = reporter
-      this.config = config
-    }
-  
-    enterContractDefinition(ctx) {
-      const identifier = ctx.children[1]
-      const text = identifier.getText()
-  
-      if (text === 'Foo' || text === 'foo') {
-        this.reporter.error(ctx, this.ruleId, 'Contracts cannot be named "Foo"')
-      }
-    }
-  }
 
 class NoUnderScoreParams {
     constructor(reporter, config) {
-        this.ruleId = 'param-name-underscore'
+        this.ruleId = 'no-underscore-params'
         this.reporter = reporter
         this.config = config
     }
@@ -35,7 +18,7 @@ class NoUnderScoreParams {
     exitParameter(ctx) {
         const identifier = this.findIdentifier(ctx)
 
-        if (identifier && naming.hasUnderScore(identifier.getText())) {
+        if (identifier && identifier.getText().startsWith('_')) {
           this._error(identifier)
         }
     }
@@ -77,22 +60,21 @@ class NoUintAlias {
 
 class UnNamedReturns {
     constructor(reporter, config) {
-        this.ruleId = 'return-no-name'
+        this.ruleId = 'unammed-returns'
         this.reporter = reporter
         this.config = config
     }
 
     exitReturnParameters(ctx) {
         const identifier = this.findIdentifier(ctx)
-        console.log('identifer', identifier)
-        console.log('b')
-        if (identifier) {
+
+        if (identifier && identifier.getText() != null) {
             this._error(identifier)
         }
     }
 
     findIdentifier(ctx) {
-        return traversing.findIdentifier(ctx);
+        return traversing.findDownType(ctx.children[1], 'IdentifierContext');
     }
 
     _error(identifier) {
@@ -100,4 +82,58 @@ class UnNamedReturns {
     }
 }
 
-module.exports = [NoFoosAllowed, UnNamedReturns, NoUintAlias, NoUnderScoreParams];
+class OnlyUnderScoreOnInternalPrivate {
+    constructor(reporter, config) {
+        this.ruleId = 'only-underscore-internal-private'
+        this.reporter = reporter
+        this.config = config
+    }
+
+    exitFunctionDefinition(ctx) {
+        const modifier = this.findModifier(ctx);
+        const identifier = this.findIdentifier(ctx);
+
+        if (modifier.getText().includes('internal') || modifier.getText().includes('private')) {
+            if (identifier && !identifier.getText().startsWith('_')) {
+                this.reporter.error(identifier, this.ruleId, 'internal and private function identifiers must be preceeded by _')
+            }
+        } else {
+            if (identifier && identifier.getText().startsWith('_')) {
+                this.reporter.error(identifier, this.ruleId, 'only internal and private function identifiers can be preceeded by _')
+            }
+        }
+    }
+
+    exitStateVariableDeclaration(ctx) {
+        const location = ctx.children[1]
+        const identifier = ctx.children[2]
+        
+        if (location.getText().includes('internal') || location.getText().includes('private')) {
+            if (identifier && !identifier.getText().startsWith('_')) {
+                this.reporter.error(identifier, this.ruleId, 'internal and private variable identifiers must be preceeded by _')
+            }
+        } else {
+            if (identifier && identifier.getText().startsWith('_')) {
+                this.reporter.error(identifier, this.ruleId, 'only internal and private variable identifiers can be preceeded by _')
+            }
+        }
+    }
+
+    findModifier(ctx) {
+        const children = ctx.children
+    
+        const ids = children.filter(i => typeOf(i) === 'modifierList')
+    
+        return ids.length > 0 && ids[0]        
+    }
+
+    findIdentifier(ctx) {
+        const children = ctx.children
+    
+        const ids = children.filter(i => typeOf(i) === 'identifier')
+    
+        return ids.length > 0 && ids[0]
+    }
+}
+
+module.exports = [UnNamedReturns, NoUintAlias, NoUnderScoreParams, OnlyUnderScoreOnInternalPrivate];
